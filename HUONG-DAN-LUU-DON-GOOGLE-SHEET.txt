@@ -1,0 +1,47 @@
+HƯỚNG DẪN LƯU ĐƠN HÀNG CHÓP NÓN VÀO GOOGLE SHEET
+
+Mục tiêu:
+- Khách bấm "Xác nhận đặt hàng".
+- Thông tin khách + sản phẩm + tổng tiền được lưu vào Google Sheet.
+- Shop mở Google Sheet để xem đơn và gọi điện xác nhận.
+
+Bước 1: Tạo Google Sheet
+1. Vào Google Drive.
+2. Tạo một Google Sheet mới.
+3. Đặt tên ví dụ: Chop Non - Don Hang.
+
+Bước 2: Mở Apps Script
+1. Trong Google Sheet, chọn Extensions / Tiện ích mở rộng.
+2. Chọn Apps Script.
+3. Xóa code mặc định.
+4. Copy toàn bộ code trong file google-apps-script-luu-don.gs và dán vào.
+5. Bấm Save.
+
+Bước 3: Deploy Web App
+1. Bấm Deploy > New deployment.
+2. Chọn loại: Web app.
+3. Execute as: Me.
+4. Who has access: Anyone.
+5. Bấm Deploy.
+6. Cho phép quyền truy cập nếu Google hỏi.
+7. Copy Web app URL.
+
+Bước 4: Dán link vào website
+1. Mở file thanh-toan.html.
+2. Tìm dòng:
+   const ORDER_ENDPOINT = '';
+3. Dán Web app URL vào giữa dấu nháy, ví dụ:
+   const ORDER_ENDPOINT = 'https://script.google.com/macros/s/.../exec';
+4. Lưu file.
+
+Bước 5: Test
+1. Mở website.
+2. Thêm sản phẩm vào giỏ hàng.
+3. Bấm Đặt Hàng.
+4. Nhập họ tên, số điện thoại, địa chỉ.
+5. Bấm Xác nhận đặt hàng.
+6. Mở Google Sheet để kiểm tra đơn mới.
+
+Lưu ý:
+- Nếu chưa dán ORDER_ENDPOINT, đơn chỉ lưu tạm trên trình duyệt của khách để test, shop sẽ không thấy được.
+- Với nhu cầu gọi điện xác nhận đơn COD, Google Sheet là cách đơn giản và đủ dùng ở giai đoạn đầu.

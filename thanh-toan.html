@@ -229,10 +229,14 @@
 <span class="">Tạm tính</span>
 <span class="" id="checkout-subtotal">0₫</span>
 </div>
+
+<!--
 <div class="flex justify-between font-label-md text-label-md text-on-surface-variant">
 <span class="">Phí vận chuyển</span>
 <span class="" id="checkout-shipping">0₫</span>
 </div>
+-->
+
 <div class="flex justify-between items-center pt-4 mt-2 border-t border-outline-variant">
 <span class="font-headline-md text-[20px] text-on-surface font-bold">Tổng cộng</span>
 <span class="font-headline-md text-headline-md text-primary font-extrabold" id="checkout-total">0₫</span>
@@ -269,7 +273,7 @@
         const CHECKOUT_CART_KEY = 'chopnon_checkout_cart';
         const ORDER_HISTORY_KEY = 'chopnon_orders';
         // Phí ship
-        // const SHIPPING_DEFAULT = 0;
+        const SHIPPING_DEFAULT = 0;
 
         // DÁN LINK GOOGLE APPS SCRIPT WEB APP CỦA BẠN VÀO ĐÂY.
         // Khi chưa dán link, đơn hàng chỉ được lưu tạm trên trình duyệt của khách để test.

@@ -326,7 +326,7 @@
                     </div>
                 `;
                 document.getElementById('checkout-subtotal').textContent = fmt(0);
-                document.getElementById('checkout-shipping').textContent = fmt(0);
+                // document.getElementById('checkout-shipping').textContent = fmt(0);
                 document.getElementById('checkout-total').textContent = fmt(0);
                 confirmBtn.disabled = true;
                 confirmBtn.classList.add('opacity-60', 'cursor-not-allowed');
@@ -347,7 +347,7 @@
             `).join('');
 
             document.getElementById('checkout-subtotal').textContent = fmt(order.subtotal);
-            document.getElementById('checkout-shipping').textContent = fmt(order.shipping);
+            // document.getElementById('checkout-shipping').textContent = fmt(order.shipping);
             document.getElementById('checkout-total').textContent = fmt(order.total);
         }
 

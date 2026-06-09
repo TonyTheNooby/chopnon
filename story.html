@@ -1,0 +1,424 @@
+<!DOCTYPE html><html class="light" lang="vi" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&family=Quicksand:wght@100..900&display=swap" rel="stylesheet">
+<title>Chóp Nón – Hành Trình NONI</title>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-variant": "#f1e1bc",
+          "secondary-container": "#fd9f5f",
+          "on-error": "#ffffff",
+          "error": "#ba1a1a",
+          "on-surface-variant": "#554339",
+          "on-secondary": "#ffffff",
+          "error-container": "#ffdad6",
+          "on-error-container": "#93000a",
+          "secondary": "#934b10",
+          "inverse-primary": "#ffb690",
+          "surface-tint": "#9b450a",
+          "primary-fixed": "#ffdbca",
+          "surface-bright": "#fff8f0",
+          "surface-container-lowest": "#ffffff",
+          "surface": "#fff8f0",
+          "outline": "#897268",
+          "outline-variant": "#dcc1b5",
+          "surface-container-highest": "#f1e1bc",
+          "on-tertiary-fixed-variant": "#6b3b00",
+          "on-secondary-fixed": "#311300",
+          "secondary-fixed": "#ffdbc7",
+          "tertiary-fixed": "#ffdcc0",
+          "inverse-on-surface": "#fff0cb",
+          "tertiary-fixed-dim": "#ffb876",
+          "on-primary-fixed-variant": "#783200",
+          "secondary-fixed-dim": "#ffb688",
+          "on-primary": "#ffffff",
+          "surface-container-low": "#fff2d8",
+          "surface-dim": "#e8d9b4",
+          "background": "#fff8f0",
+          "primary-container": "#b75b21",
+          "surface-container": "#fdedc7",
+          "on-tertiary-fixed": "#2d1600",
+          "on-primary-fixed": "#341100",
+          "inverse-surface": "#383016",
+          "on-primary-container": "#fffbff",
+          "on-secondary-fixed-variant": "#733600",
+          "tertiary": "#8a4d00",
+          "primary": "#984307",
+          "tertiary-container": "#aa6310",
+          "primary-fixed-dim": "#ffb690",
+          "surface-container-high": "#f7e7c1",
+          "on-secondary-container": "#743600",
+          "on-tertiary-container": "#fffbff",
+          "on-tertiary": "#ffffff",
+          "on-background": "#221b04",
+          "on-surface": "#221b04"
+        },
+        borderRadius: {
+          DEFAULT: "0.25rem",
+          lg: "0.5rem",
+          xl: "0.75rem",
+          full: "9999px"
+        },
+        spacing: {
+          "margin-mobile": "16px",
+          base: "8px",
+          "margin-desktop": "32px",
+          "gutter-mobile": "16px",
+          "gutter-desktop": "24px"
+        },
+        fontFamily: {
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-lg": ["Quicksand"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-md": ["Quicksand"]
+        },
+        fontSize: {
+          "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.02em", fontWeight: "500" }],
+          "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+          "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+          "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* Stagger children */
+  .stagger > *:nth-child(1) { transition-delay: 0s; }
+  .stagger > *:nth-child(2) { transition-delay: 0.1s; }
+  .stagger > *:nth-child(3) { transition-delay: 0.2s; }
+  /* Floating badge */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+  .float-badge { animation: float 3.5s ease-in-out infinite; }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #dcc1b5; border-radius: 9999px; }
+  /* Progress bar */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, #984307, #fd9f5f);
+    z-index: 9999; width: 0%; transition: width 0.1s linear;
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-lg selection:bg-secondary-container selection:text-on-secondary-container">
+
+<div id="progress-bar"></div>
+
+<!-- TopAppBar -->
+<header id="header" class="fixed top-0 w-full z-50 bg-surface-container-low/90 backdrop-blur-md shadow-sm transition-all duration-300">
+  <div class="flex justify-between items-center px-margin-desktop py-4 max-w-7xl mx-auto">
+    <div class="flex items-center gap-3">
+      <span class="font-headline-lg text-headline-lg font-bold text-primary" style="font-size:26px; line-height:1;">Chóp Nón</span>
+    </div>
+    <nav class="hidden md:flex gap-8 items-center">
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#kham-pha">Khám phá</a>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="#stories">Câu chuyện</a>
+      <a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">NONI</a>
+    </nav>
+    <div class="flex items-center gap-4">
+      <!-- Mobile menu toggle -->
+      <button id="menu-btn" class="md:hidden material-symbols-outlined text-primary" style="font-size:28px;">menu</button>
+      <button class="material-symbols-outlined text-primary active:scale-95 transition-transform hidden md:block" style="font-size: 32px;">account_circle</button>
+    </div>
+  </div>
+  <!-- Mobile nav -->
+  <div id="mobile-nav" class="hidden md:hidden px-6 pb-4 flex flex-col gap-4 bg-surface-container-low/95 backdrop-blur-md">
+    <a class="text-on-surface-variant hover:text-primary transition-colors font-medium py-2 border-b border-outline-variant" href="#kham-pha">Khám phá</a>
+    <a class="text-on-surface-variant hover:text-primary transition-colors font-medium py-2 border-b border-outline-variant" href="#stories">Câu chuyện</a>
+    <a class="text-primary font-bold py-2" href="#">NONI</a>
+  </div>
+</header>
+
+<main class="pt-24 pb-16">
+
+  <!-- Hero Video Section -->
+  <section class="max-w-7xl mx-auto px-margin-desktop mb-20 reveal">
+    <div class="relative rounded-xl overflow-hidden shadow-xl bg-surface-container-high aspect-video group cursor-pointer">
+      <img
+        alt="Hành Trình NONI – Phim tài liệu"
+        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALhwOXEt_Okcj3hpE851Q0TpC8pyfRLxwLNZyRm38wORYpK8izj1vIAgga1StFokzD78M4eFxfGishm80-s2iKG6Mk2uKckp_DCXcJp3SUhnM6nuuW-8IzhD0Fhf1vtEnE40Ky7RLpHV3rfLBhLIQi4HWD1blhLKaTY-WU0nWLgUYR3-DqYDwaWpWu7b_6oDaFpj45wzxNgG8aTADIVrZ1fyAS-xys6fk8Pf9amk3MxLl1KRUlEBxG9wAhxKpIPf9OWJa0YAGRq4Is"
+      >
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
+        <!-- Badge -->
+        <div class="flex items-center gap-3 mb-4">
+          <span class="float-badge inline-flex items-center gap-1.5 bg-secondary-container/90 text-on-secondary-container text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+            <span class="material-symbols-outlined" style="font-size:14px; font-variation-settings:'FILL' 1;">movie</span>
+            Phim tài liệu
+          </span>
+        </div>
+        <h1 class="font-headline-lg text-white mb-4" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height:1.15;">Hành Trình NONI</h1>
+        <p class="text-white/85 font-body-lg max-w-2xl mb-8 leading-relaxed text-sm md:text-base">
+          Lắng nghe câu chuyện về sự ra đời của Noni – linh vật mang tâm hồn của chiếc nón lá truyền thống, và hành trình tìm kiếm câu trả lời cho câu hỏi "tại sao nón lá lại được gìn giữ qua bao thế hệ người Việt?".
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button class="bg-primary hover:bg-primary-container text-on-primary px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all transform active:scale-95 shadow-lg">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            Xem ngay
+          </button>
+          <button class="border border-white/50 hover:border-white text-white px-8 py-3 rounded-full font-medium flex items-center gap-2 transition-all active:scale-95 backdrop-blur-sm">
+            <span class="material-symbols-outlined" style="font-size:18px;">info</span>
+            Tìm hiểu thêm
+          </button>
+        </div>
+      </div>
+      <!-- Center Play overlay -->
+      <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+        <div class="w-24 h-24 rounded-full bg-primary/90 flex items-center justify-center text-white shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-300 ring-4 ring-white/30">
+          <span class="material-symbols-outlined" style="font-size: 48px; font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="max-w-7xl mx-auto px-margin-desktop mb-20 reveal">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-surface-container rounded-xl p-5 text-center border border-outline-variant hover:border-primary transition-colors">
+        <div class="text-3xl font-bold text-primary font-headline-lg mb-1">50+</div>
+        <div class="text-on-surface-variant text-label-md">Năm nghề nón</div>
+      </div>
+      <div class="bg-surface-container rounded-xl p-5 text-center border border-outline-variant hover:border-primary transition-colors">
+        <div class="text-3xl font-bold text-primary font-headline-lg mb-1">3</div>
+        <div class="text-on-surface-variant text-label-md">Video khám phá</div>
+      </div>
+      <div class="bg-surface-container rounded-xl p-5 text-center border border-outline-variant hover:border-primary transition-colors">
+        <div class="text-3xl font-bold text-primary font-headline-lg mb-1">1</div>
+        <div class="text-on-surface-variant text-label-md">Linh vật – Noni</div>
+      </div>
+      <div class="bg-surface-container rounded-xl p-5 text-center border border-outline-variant hover:border-primary transition-colors">
+        <div class="text-3xl font-bold text-primary font-headline-lg mb-1">∞</div>
+        <div class="text-on-surface-variant text-label-md">Thế hệ gìn giữ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discovery Grid -->
+  <section id="kham-pha" class="max-w-7xl mx-auto px-margin-desktop mb-20">
+    <div class="flex items-end justify-between mb-10 border-b border-outline-variant pb-4 reveal">
+      <div>
+        <h2 class="font-headline-lg text-primary mb-2">Khám Phá Thêm</h2>
+        <p class="text-on-surface-variant">Đắm mình trong những lát cắt văn hóa đầy màu sắc của Noni.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
+
+      <!-- Card 1 -->
+      <div class="group cursor-pointer reveal">
+        <div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container shadow-sm">
+          <img alt="Noni & Làng Nón Chuông" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvRtNMOOZKgNYwdnT9txn_GgSiU_E8RbsuHXsXZizl9A1avksruvj_UlxODbowj9X60twCRLbNcSAzOUiBh3Pm3ZlKmkewEG35O6kWdqX6vdUAzOBKSZJTQLVH42PnqbOjVwidZ_GJF4CljcGCI25U9qC0hdw7b6M457QRZPf6PBlcg5gEDRkIVE2rixOv_T5EJV1KdqkGNYSJ3kSSIfprAhROHDM0F9avhFiEbWTgjGR8X6bo5aTxs0tGxkY8urJSSW8TXZKqUwyL">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+            <div class="w-14 h-14 rounded-full bg-white/90 text-primary opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 flex items-center justify-center shadow-lg">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </div>
+          </div>
+          <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">04:20</div>
+        </div>
+        <h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors mb-1">Noni & Làng Nón Chuông</h3>
+        <p class="text-on-surface-variant font-body-lg line-clamp-2 text-sm">Khám phá ngôi làng cổ nơi những chiếc nón lá đầu tiên được tạo hình cho Noni.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="group cursor-pointer reveal">
+        <div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container shadow-sm">
+          <img alt="Quy trình chế tác thủ công" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXP2zldsVLbcHEPU_MylWzrnJENGoQ23Z-uwGmwZF0FODpJWWElK5ws1nUTaTsLKEmcFuINkXOrzG-bJvnASGzRrF3nIttDS7LnruOXyRl_x4TvQNON2rV-kCvXGcqlApNdZmUnb44hCpYJjVSJODMKOONWyorvIyV2M3OOspUxmG_t0jFYeDRjytxGE0yfBYYx2XCSOIjEjDZXWI_inelEVQM_Wv_EiOKtaAr4tbF_S3wTZ5pmjqu2i3s21ZAv6TPEmujUtHHExuZ">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+            <div class="w-14 h-14 rounded-full bg-white/90 text-primary opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 flex items-center justify-center shadow-lg">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </div>
+          </div>
+          <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">06:15</div>
+        </div>
+        <h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors mb-1">Quy trình chế tác thủ công</h3>
+        <p class="text-on-surface-variant font-body-lg line-clamp-2 text-sm">Từng đường kim mũi chỉ đều chứa đựng tâm huyết của những nghệ nhân ưu tú nhất.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="group cursor-pointer reveal">
+        <div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-surface-container shadow-sm">
+          <img alt="Sắc Cờ - Tự hào Việt Nam" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaOsMRFnEMGUSpj5wqe60v7auR6LjCIGrW9cqclOeKZb5BfZOEDB8K4pJEUN0VZP1Dc3nbYMJshZi6YPQqHZJl9exXkCU1rpAsEYekA4O5MITrH4QR4va69lgCwpEU2GR6lShYhas2aBHWz1eHp8kb7LkhKXmjervx7wXDb606zUsM0WFZmhUUSXkoAHvWQKjcYRzsuaklf5Jm_RB6endWTXmZKFaAgqodThuBrp4il_Hur2zFmmi-gJvPRWRLKsfMOMxO2AfP-8V5">
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+            <div class="w-14 h-14 rounded-full bg-white/90 text-primary opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 flex items-center justify-center shadow-lg">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </div>
+          </div>
+          <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded font-medium">03:50</div>
+        </div>
+        <h3 class="font-headline-md text-on-surface group-hover:text-primary transition-colors mb-1">Sắc Cờ – Tự hào Việt Nam</h3>
+        <p class="text-on-surface-variant font-body-lg line-clamp-2 text-sm">Noni cùng màu cờ sắc áo tỏa sáng trên đấu trường quốc tế, mang bản sắc Việt vươn xa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories from the Village -->
+  <section id="stories" class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img alt="Background Pattern" class="w-full h-full object-cover opacity-10"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCLBtO52tu8969n2T9NoQVtLdadWQxTL50BpweRc75OpNx1KYz1QYqpN9UeH0oNE_oZhYMhHs0kVVRZ-HBtsfEQplxysmH6HsLIyeaNw8wQVpz2tw8sDa152m_MDnDWfNRkMdWd9oXaWFNgscZcjCms1UmFwboMJy1N7Lno1O8TUY5Pw_updYZgRJe_zv1T42SoyVAP3E63U_p0mrE5Y_6LARffRmvzEImz6x_E-f_dQhAJEcEczDbPphp0Bx6qNpG863AFVOHOAtM">
+      <div class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-background"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-margin-desktop">
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <div class="w-full md:w-1/2 reveal">
+          <span class="text-label-md text-secondary uppercase tracking-widest font-bold mb-3 block">Di sản & Cộng đồng</span>
+          <h2 class="font-headline-lg text-primary mb-6">Stories from the Village</h2>
+          <div class="space-y-6">
+            <div class="bg-surface-container/80 backdrop-blur-sm p-6 rounded-xl border border-outline-variant hover:border-primary hover:shadow-md transition-all group cursor-pointer">
+              <div class="flex gap-4 items-start">
+                <div class="w-14 h-14 rounded-lg bg-secondary-container flex-shrink-0 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-on-secondary" style="font-size: 28px;">history_edu</span>
+                </div>
+                <div>
+                  <h4 class="font-headline-md text-secondary mb-1">Lời kể của Nghệ nhân</h4>
+                  <p class="text-on-surface-variant text-label-md leading-relaxed">Gặp gỡ nghệ nhân Nguyễn Văn A, người đã gắn bó 50 năm với nghề nón và là cố vấn tạo hình cho Noni.</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface-container/80 backdrop-blur-sm p-6 rounded-xl border border-outline-variant hover:border-primary hover:shadow-md transition-all group cursor-pointer">
+              <div class="flex gap-4 items-start">
+                <div class="w-14 h-14 rounded-lg bg-secondary-container flex-shrink-0 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-on-secondary" style="font-size: 28px;">groups</span>
+                </div>
+                <div>
+                  <h4 class="font-headline-md text-secondary mb-1">Cộng đồng Noni</h4>
+                  <p class="text-on-surface-variant text-label-md leading-relaxed">Những câu chuyện truyền cảm hứng từ các bạn trẻ yêu văn hóa, những người đang lan tỏa hình ảnh Noni.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 reveal">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500">
+            <img alt="Village Story" class="w-full h-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBafbplhWs85q_r3k20ZRDA6Yl-B5b2SBNoG35heWAc5IjjMG0r75j_Vl37s565im5vZ4pzZZHFrwnZeoHqla5Obs9THuk-gZOLbb-YI6nkaSKnqv3-Vp0HW2zAmkrO-CzNrf354HIzI86v4KYi5oPXxdJRHq2nKvMEY9JIwGlo80EscwcDWPZ7NdRsOOjAC7U4LzbHiTeAfQJwzOBXqUb7mX4aJ-9H7cUJsNZqsniu8SV0uf35XfDkSRxh07wE00oTBTj0fdmItbUY">
+            <div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+            <!-- Floating quote -->
+            <div class="absolute bottom-4 left-4 right-4 bg-surface-container-low/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+              <p class="text-on-surface text-sm italic font-medium">"Nón lá không chỉ là vật dụng – đó là linh hồn của người Việt dưới bầu trời nắng gió."</p>
+              <p class="text-secondary text-xs mt-1 font-bold">– Nghệ nhân Nguyễn Văn A</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="max-w-7xl mx-auto px-margin-desktop my-20 reveal">
+    <div class="bg-gradient-to-br from-primary to-primary-container rounded-2xl p-10 md:p-16 text-center shadow-xl relative overflow-hidden">
+      <!-- Decorative circles -->
+      <div class="absolute -top-12 -right-12 w-48 h-48 bg-white/5 rounded-full pointer-events-none"></div>
+      <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full pointer-events-none"></div>
+      <span class="material-symbols-outlined text-white/50 mb-4 block" style="font-size:48px; font-variation-settings:'FILL' 1;">mail</span>
+      <h2 class="font-headline-lg text-white mb-3" style="font-size:clamp(1.5rem, 3vw, 2.25rem);">Theo dõi hành trình Noni</h2>
+      <p class="text-white/80 max-w-md mx-auto mb-8 font-body-lg">Nhận cập nhật mới nhất về những câu chuyện văn hóa, video mới và sự kiện từ Chóp Nón.</p>
+      <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input type="email" placeholder="Email của bạn" class="flex-1 px-5 py-3 rounded-full bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:border-white backdrop-blur-sm font-body-lg">
+        <button class="bg-white text-primary font-bold px-7 py-3 rounded-full hover:bg-surface-variant transition-colors active:scale-95">
+          Đăng ký
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full mt-auto bg-surface-container-highest border-t border-outline-variant">
+  <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 gap-gutter-desktop max-w-7xl mx-auto">
+    <div class="flex flex-col items-center md:items-start gap-3">
+      <span class="font-headline-md text-headline-md text-on-surface font-bold">Chóp Nón</span>
+      <p class="text-on-surface-variant/70 text-label-md max-w-xs text-center md:text-left">
+        Lan tỏa di sản, gìn giữ hồn nón Việt thông qua mascot Noni.
+      </p>
+    </div>
+    <div class="flex gap-8">
+      <div class="flex flex-col gap-1">
+        <a class="text-on-surface-variant hover:text-primary transition-colors font-medium text-sm" href="#">Fanpage</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors font-medium text-sm" href="#">Instagram</a>
+      </div>
+      <a class="text-on-surface-variant hover:text-primary transition-colors font-medium text-sm" href="#">Trang chủ</a>
+    </div>
+    <div class="flex flex-col items-center md:items-end gap-4">
+      <div class="flex gap-3">
+        <button class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary hover:scale-110 transition-transform hover:bg-primary-fixed">
+          <span class="material-symbols-outlined" style="font-size:20px;">public</span>
+        </button>
+        <button class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-primary hover:scale-110 transition-transform hover:bg-primary-fixed">
+          <span class="material-symbols-outlined" style="font-size:20px;">share</span>
+        </button>
+      </div>
+      <p class="text-secondary font-body-lg text-sm">© 2024 Chóp Nón.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+
+    // Header shadow
+    const header = document.getElementById('header');
+    if (scrollTop > 20) {
+      header.classList.add('shadow-md');
+    } else {
+      header.classList.remove('shadow-md');
+    }
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Trigger hero immediately
+  reveals[0]?.classList.add('visible');
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  menuBtn.addEventListener('click', () => {
+    mobileNav.classList.toggle('hidden');
+    menuBtn.textContent = mobileNav.classList.contains('hidden') ? 'menu' : 'close';
+  });
+</script>
+</body>
+</html>
